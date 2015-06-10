@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
@@ -10,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^one$', 'core.views.one', name='one'),
     url(r'^sources$', 'core.views.sources', name='sources'),
     url(r'^sync$', 'core.views.sync', name='sync'),
+    url(r'^add$', 'core.views.add', name='add'),
     # url(r'^pasty/', include('pasty.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

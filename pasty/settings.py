@@ -99,6 +99,13 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages'
+    # ...
+)
+
 ROOT_URLCONF = 'pasty.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -107,6 +114,7 @@ WSGI_APPLICATION = 'pasty.wsgi.application'
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 )
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -150,3 +158,7 @@ LOGGING = {
         },
     }
 }
+
+
+BROKER_URL = 'redis://192.168.1.134:6379/0'
+

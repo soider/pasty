@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>
+        {% block title %}
+        Пирожки :-)
+        {% endblock %}
+    </title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
+    {% block additional_head %}
+
+    {% endblock %}
+</head>
+<body class="box">
+        <div class="navigation_block">
+            {%  block top_menu %}
+                {%  include "core/blocks/menu.html" %}
+            {% endblock %}
+        </div>
+
+        <div id="wrapper">
+
+                {%  block content %}
+
+                {%  endblock %}
+
+        </div>
+</body>
+</html>

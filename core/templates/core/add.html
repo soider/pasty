@@ -1,0 +1,29 @@
+{% extends "core/base_template.html" %}
+
+{% block title %}
+    Предложить пирожок
+{% endblock %}
+
+{% block top_menu %}
+    <a class="nav" href="/">&larr; На главную</a>
+{% endblock %}
+
+{% block content %}
+    <div class="sources">
+        <form action="{% url 'add' %}" method="post">
+            {% csrf_token %}
+            <h3>Предложить пирожок</h3>
+            <textarea name="pasty_body" class="pasty_body"></textarea>
+            <input type="submit" value="Отправить"/>
+        </form>
+        {% if messages %}
+            <div class="messages">
+                <ul>
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

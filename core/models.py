@@ -11,6 +11,7 @@ class Pasty(models.Model):
     date = models.DateTimeField(u'Дата публикации', blank=True, null=True)
     source = models.URLField(u'Источник', blank=True)
     votes = models.IntegerField(u'Голосов', default=0, null=True)
+    published = models.BooleanField(u'Опубликовано', default=False, null=False)
     source_pattern = re.compile(r'''http://(?:www\.)?(.+)''')
 
     def short_text(self):
@@ -24,9 +25,10 @@ class Pasty(models.Model):
 
     @staticmethod
     def rnd():
-        if Pasty.objects.count() == 0:
+        try:
+            return Pasty.objects.filter(published=True).order_by('?')[0]
+        except IndexError:
             return None
-        return Pasty.objects.order_by('?')[0]
 
 
 class Source(models.Model):

@@ -18,6 +18,13 @@ div.pasty {
     font-size:200%;
 }
 
+textarea.pasty_body {
+    display: block;
+    min-width: 500px;
+    min-height: 150px;
+    margin: 0 0 15px 0;
+}
+
 div.sources {
     width: 50%;
     min-width: 500px;
@@ -35,7 +42,7 @@ cite {
     bottom: 5px;
 }
 
-a, a:visited {
+#wrapper a, #wrapper a:visited {
     color: darkblue;
     text-decoration: none;
 }
@@ -70,9 +77,14 @@ li {
     font-size: 75%;
 }
 
-a.sources {
+.navigation_block {
     position: absolute;
     top: 5px;
     right: 5px;
     color: #fff;
+}
+
+.navigation_block a {
+    color: #fff;
+    text-decoration: none;
 }
