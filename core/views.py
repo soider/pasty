@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import core.tasks
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -7,14 +8,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from core.models import Pasty
 from core.models import Source
-from core.sync import sync_rss_source
 
 
 def home(request):
+    """Index"""
     return render(request, 'core/index.html')
 
 
 def one(request):
+    """Returns one pastry, used from javascript for page updates"""
     p = Pasty.rnd()
     if p:
         context = {'text': p.text, 'source': p.source, 'title': p.source_title()}
@@ -25,22 +27,25 @@ def one(request):
 
 @login_required
 def sources(request):
+    """Sources list"""
     sources = Source.objects.all()
     context = {'sources': sources }
-    return render(request, 'core/sync.html', context)
+    return render(request, 'core/sources.html', context)
 
 
 @login_required
 def sync(request):
+    """Start synchronization process"""
     sources_id = request.POST.getlist('source')
     if sources_id:
         for src_id in sources_id:
-            source = Source.objects.get(pk=src_id)
-            sync_rss_source(source)
+            core.tasks.SyncTask().delay(src_id)
+    messages.info(request, u"Синхронизация запущена!")
     return HttpResponseRedirect(reverse('sources'))
 
 
 def add(request):
+    """Creates unpublished pastry"""
     if request.method == 'POST':
         pasty_body = request.POST['pasty_body']
         Pasty(text=pasty_body).save()

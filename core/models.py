@@ -7,6 +7,11 @@ from django.db import models
 
 
 class Pasty(models.Model):
+
+    class Meta:
+        verbose_name = u'Пирожок'
+        verbose_name_plural = u'Пирожки'
+
     text = models.TextField(u'Текст пирожка')
     date = models.DateTimeField(u'Дата публикации', blank=True, null=True)
     source = models.URLField(u'Источник', blank=True)
@@ -32,6 +37,11 @@ class Pasty(models.Model):
 
 
 class Source(models.Model):
+
+    class Meta:
+        verbose_name = u'Источник'
+        verbose_name_plural = u'Источники'
+
     title = models.TextField(u'Название источника')
     url = models.URLField(u'Ссылка')
     sync_url = models.URLField(u'URL синхронизации', blank=True)
@@ -41,5 +51,5 @@ class Source(models.Model):
     def __unicode__(self):
         return self.title
 
-    def parser(self):
+    def parser_key(self):
         return self.parser_pattern.sub('_', self.title)

@@ -69,6 +69,10 @@ li {
     -webkit-box-pack: center;
 }
 
+p.box {
+    max-width: 450px;
+}
+
 .pre {
     white-space: pre;
 }
