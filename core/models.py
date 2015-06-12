@@ -2,11 +2,14 @@
 
 import os
 import re
+import random
 from urlparse import urlparse
 from django.db import models
 
+MAX_IN_BATCH = 30
 
 class Pasty(models.Model):
+
 
     class Meta:
         verbose_name = u'Пирожок'
@@ -30,10 +33,17 @@ class Pasty(models.Model):
 
     @staticmethod
     def rnd():
-        try:
-            return Pasty.objects.filter(published=True).order_by('?')[0]
-        except IndexError:
-            return None
+        pasties = list(Pasty.objects.filter(published=True).order_by('?')[0:MAX_IN_BATCH])
+        counter = 0
+        upper_limit = sum(pasty.votes for pasty in pasties)
+        random_limit = random.uniform(0, upper_limit)
+        for pasty in pasties:
+            if counter + pasty.votes >= random_limit:
+                return pasty
+            else:
+                counter += pasty.votes
+        return None
+
 
 
 class Source(models.Model):

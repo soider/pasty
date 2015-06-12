@@ -163,3 +163,12 @@ LOGGING = {
 BROKER_URL = 'redis://192.168.1.134:6379/0'
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+from datetime import timedelta
+
+CELERYBEAT_SCHEDULE = {
+    'scheduled_sync': {
+        'task': 'core.tasks.sync_all',
+        'schedule': timedelta(minutes=10),
+    },
+}

@@ -12,7 +12,7 @@ def remove_html_tags(html):
 
 def to_date(date_object):
     """Try to convert :date_object: to :datetime:"""
-    if isinstance(basestring, date_object):
+    if isinstance(date_object, basestring):
         return datetime.datetime.strptime(
             date_object,
             '%d.%m.%Y'

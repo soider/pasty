@@ -68,7 +68,7 @@ class BaseParser(object):
     def check_last_update_date(self):
         if self.source.sync_date and \
                         self.source.sync_date >= self.last_update:
-            raise StopParsing("Source is already up to date", self.source)
+            raise StopParsing("Source is already up to date")
 
     def parse_entries(self):
         for entry in self.raw_entries:

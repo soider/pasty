@@ -16,14 +16,6 @@
             <textarea name="pasty_body" class="pasty_body"></textarea>
             <input type="submit" value="Отправить"/>
         </form>
-        {% if messages %}
-            <div class="messages">
-                <ul>
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+        {%  include "core/blocks/messages.html" %}
     </div>
 {% endblock %}
